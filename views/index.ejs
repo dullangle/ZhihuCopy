@@ -4,42 +4,24 @@
     <title>知乎</title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
     <link rel='stylesheet' href='/stylesheets/nav.css' />
+    <link rel='stylesheet' href='/stylesheets/index.css' />
+    <script type="text/javascript" src="/javascripts/jquery.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap.js"></script>
+
   </head>
   <body class="container">
-  <nav class="navbar navbar-default navbar-fixed-top zhihu-top">
-    <div class="container">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <a class="navbar-brand zhihu-brand" style="color: white" href="/">知乎</a>
+      <%- include topnav%>
+      <div class="index-zhihu col-md-12  ">
+        <div class="left-content col-md-8 ">
+          <div class="tag-top">
+            <span class="glyphicon glyphicon-th-list"></span>
+            <span class="h4">最新动态</span>
+          </div>
+        </div>
+        <div class="right-others col-md-4 ">
+          <img id="working" src="/images/static/working.png" alt="">
+          <span id="warning">抱歉，这边正在紧张的施工…</span>
+        </div>
       </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-        <form class="navbar-form navbar-left" role="search">
-          <div class="form-group form-serch">
-            <input type="text" class="form-control" placeholder="搜索问题、话题或人..">
-            <button class="glyphicon glyphicon-search  zhihu-search"></button>
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-default">提问</button>
-          </div>
-        </form>
-
-        <ul class="nav navbar-nav">
-          <li><a href="#" style="color: white">首页</a></li>
-          <li><a href="#" style="color: white">话题</a></li>
-          <li><a href="#" style="color: white">发现</a></li>
-          <li><a href="#" style="color: white">消息</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right nav-user">
-          <li>
-              <img class="user-avatar" src="/images/static/liukanshan.png">
-          </li>
-          <li><a href="#" style="color: white" class="navbar-brand">Three</a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
   </body>
 </html>

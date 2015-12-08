@@ -1,0 +1,85 @@
+<div class="top-navbar">
+    <nav class="navbar navbar-default navbar-fixed-top zhihu-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand zhihu-brand" style="color: white" href="/">知乎</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group form-serch">
+                        <input type="text" class="form-control" placeholder="搜索问题、话题或人..">
+                        <button class="glyphicon glyphicon-search  zhihu-search"></button>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#askModal">提问</button>
+                    </div>
+                </form>
+
+                <ul class="nav navbar-nav">
+                    <li><a href="#" style="color: white">首页</a></li>
+                    <li><a href="#" style="color: white">话题</a></li>
+                    <li><a href="#" style="color: white">发现</a></li>
+                    <li><a href="#" style="color: white">消息</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right nav-user">
+                    <li>
+                        <img class="user-avatar" src="/images/static/liukanshan.png">
+                    </li>
+                    <li><a href="#" style="color: white" class="navbar-brand">Three</a></li>
+                    <ul href="/home" class="navbar-user-tab">
+                        <li><a href="/home" style="color: white"><span class="glyphicon glyphicon-user"></span>我的主页</a></li>
+                        <li><a href="/setting" style="color: white"><span class="glyphicon glyphicon-cog"></span>设置</a></li>
+                        <li><a href="/logout" style="color: white"><span class="glyphicon glyphicon-off"></span>退出</a></li>
+                    </ul>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <br clear="both">
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="askModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" >
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" >提问</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form action="/question" method="post" class="form-horizontal">
+                        <div class="form-group">
+                            <input type="text" name="title" placeholder="写下你的问题" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label >问题说明：</label>
+                            <textarea name="description" class="form-control" rows="5" placeholder="问题背景、条件等详细信息"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label >话题:</label>
+                            <input type="text" id="tag1" name="tag1" placeholder="最多3个话题" class="form-control question_tag">
+                        </div>
+                        <script>
+                            $("#tag1").focus(function () {
+                                $("#tag2").attr("disabled", false);
+                            });
+                            $("#tag2").focus(function () {
+                                $("#tag3").attr("disabled", false);
+                            });
+                        </script>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
