@@ -10,9 +10,9 @@
     <script type="text/javascript" src="/javascripts/angular.min.js"></script>
     <script type="text/javascript" src="/javascripts/angular-route.min.js"></script>
 </head>
-<body class="container" ng-app="home">
+<body class="container" ng-app="home" ng-controller="homeCtrl">
     <%- include topnav%>
-    <div class="home-zhihu col-md-12  ">
+    <div class="home-zhihu col-md-12 ">
         <div class="left-content col-md-8 ">
             <div class="detail panel panel-default">
                 <div class="panel-heading">
@@ -32,9 +32,15 @@
                 </div>
                 <div class="panel-footer">
                     <ul class="nav nav-pills">
-                        <li role="presentation"><a href="#/ans">回答</a></li>
-                        <li role="presentation"><a href="#/que">提问</a></li>
-                        <li role="presentation"><a href="#/">Messages</a></li>
+                        <li role="presentation"  ng-class="{active : activeMenu === 'Home'}"  ng-click="activeMenu = 'Home'">
+                            <a href="#/ans" >Home</a>
+                        </li>
+                        <li role="presentation"  ng-class="{active : activeMenu === 'Ans'}" ng-click="activeMenu = 'Ans'">
+                            <a href="#/ans" >回答</a>
+                        </li>
+                        <li role="presentation" ng-class="{active : activeMenu === 'Que'}" ng-click="activeMenu = 'Que'">
+                            <a href="#/que">提问</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -64,6 +70,7 @@
                 });
             }]);
     </script>
+    <script type="text/javascript" src="/controller/homeCtrl.js"></script>
     <script type="text/javascript" src="/controller/ansCtrl.js"></script>
     <script type="text/javascript" src="/controller/queCtrl.js"></script>
 </body>
