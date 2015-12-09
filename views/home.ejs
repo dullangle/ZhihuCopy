@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html >
 <head>
     <title>Home</title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
     <link rel='stylesheet' href='/stylesheets/nav.css' />
     <link rel='stylesheet' href='/stylesheets/home.css' />
+    <script type="text/javascript" src="/javascripts/jquery.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap.js"></script>
+    <script type="text/javascript" src="/javascripts/angular.min.js"></script>
+    <script type="text/javascript" src="/javascripts/angular-route.min.js"></script>
 </head>
-<body class="container">
+<body class="container" ng-app="home">
     <%- include topnav%>
     <div class="home-zhihu col-md-12  ">
         <div class="left-content col-md-8 ">
@@ -26,18 +30,41 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="answer panel panel-default">
-                <div class="panel-heading">回答</div>
-                <div class="panel-body">
-                    Panel content
+                <div class="panel-footer">
+                    <ul class="nav nav-pills">
+                        <li role="presentation"><a href="#/ans">回答</a></li>
+                        <li role="presentation"><a href="#/que">提问</a></li>
+                        <li role="presentation"><a href="#/">Messages</a></li>
+                    </ul>
                 </div>
             </div>
+            <div ng-view></div>
         </div>
         <div class="right-others col-md-4 ">
             <img id="working" src="/images/static/working.png" alt="">
             <span id="warning">抱歉，这边正在紧张的施工…</span>
         </div>
     </div>
+
+    <script>
+        angular.module("home",['ngRoute'])
+            .config(['$routeProvider',
+            function ($routeProvider) {
+                $routeProvider.when('/', {
+                    templateUrl: '/partials/ans.html',
+                    controller:"ansCtrl"
+                }).when('/ans', {
+                    templateUrl: '/partials/ans.html',
+                    controller:"ansCtrl"
+                }).when('/que', {
+                    templateUrl: '/partials/que.ejs',
+                    controller:"queCtrl"
+                }).otherwise({
+                    redirectTo:'/'
+                });
+            }]);
+    </script>
+    <script type="text/javascript" src="/controller/ansCtrl.js"></script>
+    <script type="text/javascript" src="/controller/queCtrl.js"></script>
 </body>
 </html>

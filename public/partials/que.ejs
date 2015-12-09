@@ -1,0 +1,16 @@
+<div class="content panel panel-default">
+    <div class="panel-heading">我的提问</div>
+    <div class="panel-body">
+        <div class="que-content" ng-repeat="que in questions">
+            <div class="row que-row">
+                <div class="que-view col-md-4 text-center">
+                    <h6 class="view-count"><strong>{{que.view}}</strong></h6>
+                    <h6 class="view-name"><strong>浏览</strong></h6>
+                </div>
+                <div class="col-content col-md-8 ">
+                    <h5><span class="que-title"><strong>{{que.title}}</strong></span></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

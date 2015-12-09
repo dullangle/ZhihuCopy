@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html ng-app="zhihu">
+    <head>
     <title>知乎</title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
     <link rel='stylesheet' href='/stylesheets/nav.css' />
     <link rel='stylesheet' href='/stylesheets/index.css' />
     <script type="text/javascript" src="/javascripts/jquery.js"></script>
     <script type="text/javascript" src="/javascripts/bootstrap.js"></script>
-
-  </head>
-  <body class="container">
+    <script type="text/javascript" src="/javascripts/angular.min.js"></script>
+    </head>
+    <body class="container" ng-controller="mainCtrl" >
       <%- include topnav%>
       <div class="index-zhihu col-md-12  ">
         <div class="left-content col-md-8 ">
@@ -23,5 +23,9 @@
           <span id="warning">抱歉，这边正在紧张的施工…</span>
         </div>
       </div>
-  </body>
+    </body>
+    <script>
+      angular.module("zhihu",[]);
+    </script>
+    <script type="text/javascript" src="/controller/mainController.js"></script>
 </html>

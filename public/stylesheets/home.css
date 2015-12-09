@@ -7,3 +7,31 @@
 .vote-detail{
     margin-top: 10px;
 }
+.que-content,.answer-content{
+    border-top: 1px dotted #EEE;
+}
+.ans-title,.que-title{
+    color: #2b669a;
+}
+.ans-up,.que-view{
+    width: 50px;
+    height: 42px;
+    background-color: #eff6fa;
+    border-radius: 10px;
+    margin-top: 8px;
+    color:#259;
+    padding: 0px;
+}
+.ans-row,.que-row{
+    margin-left: 20px;
+}
+.up-count,.view-count{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.up-name,.view-name{
+    margin-top: 5px;
+}
+.que-row{
+    margin-bottom: 10px;
+}

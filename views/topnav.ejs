@@ -20,10 +20,10 @@
                 </form>
 
                 <ul class="nav navbar-nav">
-                    <li><a href="#" style="color: white">首页</a></li>
-                    <li><a href="#" style="color: white">话题</a></li>
-                    <li><a href="#" style="color: white">发现</a></li>
-                    <li><a href="#" style="color: white">消息</a></li>
+                    <li><a href="#/" style="color: white">首页</a></li>
+                    <li><a href="#/" style="color: white">话题</a></li>
+                    <li><a href="#/" style="color: white">发现</a></li>
+                    <li><a href="#/" style="color: white">消息</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right nav-user">
                     <li>
@@ -31,7 +31,7 @@
                     </li>
                     <li><a href="#" style="color: white" class="navbar-brand">Three</a></li>
                     <ul href="/home" class="navbar-user-tab">
-                        <li><a href="/home" style="color: white"><span class="glyphicon glyphicon-user"></span>我的主页</a></li>
+                        <li><a href="/home/#/" style="color: white"><span class="glyphicon glyphicon-user"></span>我的主页</a></li>
                         <li><a href="/setting" style="color: white"><span class="glyphicon glyphicon-cog"></span>设置</a></li>
                         <li><a href="/logout" style="color: white"><span class="glyphicon glyphicon-off"></span>退出</a></li>
                     </ul>
@@ -65,6 +65,10 @@
                             <label >话题:</label>
                             <input type="text" id="tag1" name="tag1" placeholder="最多3个话题" class="form-control question_tag">
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                            <button type="submit" class="btn btn-primary" >保存</button>
+                        </div>
                         <script>
                             $("#tag1").focus(function () {
                                 $("#tag2").attr("disabled", false);
@@ -76,10 +80,7 @@
                     </form>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">保存</button>
-            </div>
+
         </div>
     </div>
 </div>
