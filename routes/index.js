@@ -4,7 +4,12 @@ var question=require("../models/question");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+    if(req.session.user){
+        res.render('index');
+    }
+    else{
+        res.render("login");
+    }
 });
 
 router.get('/home', function(req, res, next) {
