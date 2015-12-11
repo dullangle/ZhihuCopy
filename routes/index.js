@@ -33,7 +33,10 @@ router.post("/question",function(req,res){
     });
 });
 
-router.post('/sign',function(req,res){
-
+router.post('/signup',function(req,res){
+    console.log(req.body.user);
+    console.log(req.body.password);
+    res.status(200).json({message:"hello"});
 });
+
 module.exports = router;

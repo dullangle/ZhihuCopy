@@ -7,8 +7,8 @@
     <script type="text/javascript" src="/javascripts/jquery.js"></script>
     <script type="text/javascript" src="/javascripts/bootstrap.js"></script>
 </head>
-<body ng-app="login" ng-controller="loginCtrl">
-    <div class="page-body text-center">
+<body ng-app="login" >
+    <div class="page-body text-center" ng-controller="appCtrl">
         <div class="main-content" >
             <div class="index-header">
                 <h1 class="logo">知乎</h1>
@@ -21,7 +21,7 @@
                     <a href="#signin" ng-class="{active:Actived ==='login'}" ng-click="Actived = 'login'">登陆</a>
                 </div>
             </div>
-            <div class="view-signup">
+            <div class="view-signup"  >
                 <ng-view></ng-view>
             </div>
         </div>
@@ -41,28 +41,65 @@
                         }).when('/signin',{
                             templateUrl: '/partials/login.html'
                         });
-                    }])
-                .controller("loginCtrl",function($scope){
+                    }]);
+                //定义Service
+                app.factory('data', function () {
+
+                    var user="";
+                    var password="";
+                    var passwordAgain="";
+                    //供外界使用Singleton对象
+                    return {
+                        user: user,  //返回内部包容数据对象给外界使用
+                        password: password, //返回内部定义的函数供外界调用
+                        passwordAgain:passwordAgain
+                    };
+                });
+
+                app.controller("appCtrl",function($scope){
                     $scope.Actived="sign";
-                    $scope.user;
-                    $scope.password;
-                    $scope.passwordAgain;
+                });
 
-                    $scope.sign=function(){
-                        if($scope.password===$scope.passwordAgain){
+                app.controller("loginCtrl",function($scope,$http,data){
+                    $scope.user=data.user;
+                    $scope.password=data.password;
+                    $scope.passwordAgain=data.passwordAgain;
 
-                        }
+                    $scope.sign=function() {
+                        console.log($scope.user);
+                        console.log($scope.password);
+                        $http(
+                                {
+                                    method: 'POST',
+                                    url: "/signup",
+                                    data: {
+                                        user: $scope.user,
+                                        password: $scope.password
+                                    }
+                                }
+                        ).success(function (data) {
+                            alert("success");
+                            alert(data.message);
+                        }).error(function (data) {
+                            alert("error");
+                            alert(data);
+                        });
                     }
                 });
 
-        app.directive('ensureSame', function() {
+
+        app.directive('ensureSame', function(data) {
             return {
                 restrict : 'A',
                 require: 'ngModel',
                 link: function(scope, ele, attrs) {
                     scope.$watch(attrs.ngModel, function() {
-                            if(scope.password!=scope.passwordAgain)
+                            if(data.password!=data.passwordAgain)
                                 scope.passwordNotAg=true;
+                            else {
+                                scope.passwordNotAg=false;
+                            }
+
                     });
                 }
             }
