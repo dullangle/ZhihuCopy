@@ -1,0 +1,26 @@
+<form class="form-horizontal" ng-submit="sign()" name="userform">
+    <div class="form-group input-sign">
+        <label  class="control-label sr-only">Email</label>
+        <div class="col-md-12">
+            <input type="nickname" class="form-control"  ng-model="user" name="nickname" placeholder="NickName" required>
+        </div>
+    </div>
+    <div class="form-group input-sign">
+        <label  class="control-label sr-only">Password</label>
+        <div class="col-md-12">
+            <input type="password" class="form-control" name="password" ng-model="password" placeholder="Password(最少6位)" ng-minlength="6" ng-required="true" >
+        </div>
+    </div>
+    <div class="form-group input-sign">
+        <label  class="control-label sr-only">Password</label>
+        <div class="col-md-12">
+            <input type="password" class="form-control" name="passwordAgain"  ng-model="passwordAgain" ensure-same placeholder="Password Again(最少6位)" ng-minlength=6 required>
+        </div>
+    </div>
+    <div class="form-group sub-sign">
+        <div class=" col-md-12">
+            <button type="submit" class="btn btn-primary btn-sign" ng-disabled="userform.$invalid" >Sign in</button>
+            <div class="alert alert-warning " role="alert" ng-show="passwordNotAg">两次的密码不一样</div>
+        </div>
+    </div>
+</form>
