@@ -60,7 +60,7 @@
                     $scope.Actived="sign";
                 });
 
-                app.controller("loginCtrl",function($scope,$http,data){
+                app.controller("loginCtrl",function($scope,$http,data,$window){
                     $scope.user=data.user;
                     $scope.password=data.password;
                     $scope.passwordAgain=data.passwordAgain;
@@ -78,8 +78,14 @@
                                     }
                                 }
                         ).success(function (data) {
-                            if(data.message)
+                            console.log(data.message);
+                            if(data.message==='ok'){
+                                console.log(data.message);
+                                $window.location.href='/index';
+                            }
+                            else if(data.message)
                                 alert(data.message);
+
                         }).error(function (data) {
                             alert("error");
                             alert(data);
@@ -88,13 +94,14 @@
                 });
 
 
-        app.directive('ensureSame', function(data) {
+        app.directive('ensureSame', function() {
             return {
                 restrict : 'A',
                 require: 'ngModel',
                 link: function(scope, ele, attrs) {
+                    console.log(scope.passwordAgain);
                     scope.$watch(attrs.ngModel, function() {
-                            if(data.password!=data.passwordAgain)
+                            if(scope.password!=scope.passwordAgain)
                                 scope.passwordNotAg=true;
                             else {
                                 scope.passwordNotAg=false;

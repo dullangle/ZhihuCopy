@@ -15,6 +15,12 @@ router.get('/', function(req, res, next) {
     }
 });
 
+router.get('/index', function(req, res, next) {
+    if(req.session.user){
+        res.render('index');
+    }
+});
+
 router.get('/home', function(req, res, next) {
     res.render('home');
 });
@@ -45,15 +51,15 @@ router.post('/signup',function(req,res){
         password = md5.update(password + configure.password_salt).digest('hex');
     User.newUser(username, password, function (err, user) {
         if (err) {
-            res.status(200).json({message:err.message});
-            return ;
+            return res.status(200).json({message:err.message});
+
         }
         res.cookie(configure.auth_cookie_name, user._id, {
             maxAge: 1000 * 60 * 60 *24 * 30,
             signed: true
         });
         req.session.user = user;
-        res.status(200).redirect('/');
+        return res.status(200).json({message:'ok'});
     });
 
 });
