@@ -11,9 +11,17 @@ var User=mongoose.model("users",UserSchema);
 
 
 exports.newUser=function(nickname,password,callback){
-    var user=new User();
-    user.NickName=nickname;
-    user.password=password;
+    User.find({ NickName: nickname }, function (err, user) {
+        if (user.length > 0) {
+            err = {};
+            err.message = '该账号已被注册！';
+            return callback(err, user);
+        }
+        // 没被注册
+        var user = new User();
 
-    user.save(callback)
+        user.NickName=nickname;
+        user.password=password;
+        user.save(callback);
+    });
 };

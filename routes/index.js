@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var question=require("../models/question");
+var User=require("../models/user");
+var crypto = require('crypto');
+var configure = require('../config');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -34,9 +37,32 @@ router.post("/question",function(req,res){
 });
 
 router.post('/signup',function(req,res){
-    console.log(req.body.user);
-    console.log(req.body.password);
-    res.status(200).json({message:"hello"});
+    var username=req.body.user;
+    var password=req.body.password;
+
+    // 密码md5加盐加密
+    var md5 = crypto.createHash('md5'),
+        password = md5.update(password + configure.password_salt).digest('hex');
+    User.newUser(username, password, function (err, user) {
+        if (err) {
+            res.status(200).json({message:err.message});
+            return ;
+        }
+        res.cookie(configure.auth_cookie_name, user._id, {
+            maxAge: 1000 * 60 * 60 *24 * 30,
+            signed: true
+        });
+        req.session.user = user;
+        res.status(200).redirect('/');
+    });
+
+});
+
+router.get('/logout', function(req, res, next) {
+    if(req.session.user){
+        req.session.user=null;
+        res.redirect('/');
+    }
 });
 
 module.exports = router;
