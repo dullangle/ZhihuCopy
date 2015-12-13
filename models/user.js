@@ -25,3 +25,17 @@ exports.newUser=function(nickname,password,callback){
         user.save(callback);
     });
 };
+
+
+exports.login=function(nickname,password,callbak){
+    User.findOne({NickName:nickname},function(err,user){
+
+       if(err){
+           err={};
+           err.message="没有该账号";
+           return callbak(err);
+       }
+
+        callbak(err,user);
+    });
+};
