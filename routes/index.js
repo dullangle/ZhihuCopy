@@ -146,12 +146,17 @@ router.post("/question/:que_id/answer",function(req,res){
     if(!ans_id){
         var answer_content=req.body.ans_content;
         if(user){
-            Answer.newAnswerSave(question_id,user._id,user.NickName,answer_content,function(err,answer){
+            question.findQueById(question_id,function(err,question){
                 if(err){
                     return res.status(200).json(err);
                 }
+                Answer.newAnswerSave(question_id,user._id,user.NickName,answer_content,question.title,function(err,answer){
+                    if(err){
+                        return res.status(200).json(err);
+                    }
 
-                return res.status(200).json(answer);
+                    return res.status(200).json(answer);
+                });
             });
         }
     }
@@ -179,6 +184,20 @@ router.get("/question/:que_id/answer",function(req,res){
     var question_id=req.params.que_id;
     if(user){
         Answer.findAnsbyQueId(question_id,function(err,answers){
+            if(err){
+                return res.status(200).json(err);
+            }
+
+            return res.status(200).json(answers);
+        });
+    }
+});
+
+
+router.get("/answers",function(req,res){
+   var user=req.session.user;
+    if(user){
+        Answer.findAnsbyUserId(user._id,function(err,answers){
             if(err){
                 return res.status(200).json(err);
             }

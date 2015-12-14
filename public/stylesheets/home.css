@@ -38,3 +38,10 @@
 .col-content{
     margin-top: 7px;
 }
+.ans-content{
+    margin-top: 5px;
+    line-height: 1.5em;
+}
+.answer-content{
+    padding-bottom: 5px;
+}

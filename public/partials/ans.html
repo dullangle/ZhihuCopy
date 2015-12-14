@@ -4,12 +4,12 @@
         <div class="answer-content" ng-repeat="ans in answers">
             <div class="row ans-row">
                 <div class="ans-up col-md-4 text-center">
-                    <h6 class="up-count"><strong>{{ans.up}}</strong></h6>
+                    <h6 class="up-count"><strong>{{ans.ups_number}}</strong></h6>
                     <h6 class="up-name"><strong>赞同</strong></h6>
                 </div>
-                <div class="col-content col-md-8  ">
-                    <a href="/quetions/"><span class="ans-title"><strong>{{ans.title}}</strong></span></a>
-                    <h6>{{ans.content}}</h6>
+                <div class="col-content col-md-10  ">
+                    <a href="/question/{{ans.question_id}}"><span class="ans-title"><strong>{{ans.question_name}}</strong></span></a>
+                    <h6 class="ans-content">{{ans.content}}</h6>
                 </div>
             </div>
         </div>

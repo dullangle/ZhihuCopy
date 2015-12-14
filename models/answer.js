@@ -5,6 +5,7 @@ var ObjectId  = Schema.ObjectId;
 
 var AnswerSchema = new Schema({
     question_id: { type: ObjectId },
+    question_name: { type: String },
     author_id: { type: ObjectId },
     author_name: { type: String },
     content: { type: String },
@@ -18,12 +19,13 @@ var AnswerSchema = new Schema({
 
 var answer=mongoose.model("answers",AnswerSchema);
 
-exports.newAnswerSave = function (question_id, author_id, author_name, content, callback) {
+exports.newAnswerSave = function (question_id, author_id, author_name, content,question_title, callback) {
     var ans = new answer();
     ans.question_id = question_id;
     ans.author_id = author_id;
     ans.author_name = author_name;
     ans.content = content;
+    ans.question_name=question_title;
     ans.save(function (err, answer) {
         Question.findByIdAndUpdate(question_id, { $push: { comment_id: author_id }}, function (err, question) {
             callback(err, answer);
@@ -33,7 +35,7 @@ exports.newAnswerSave = function (question_id, author_id, author_name, content, 
 
 exports.findAnsbyQueId=function(question_id,callback){
   answer.find({question_id:question_id},function(err,answers){
-        callback(answers);
+        callback(err,answers);
   });
 };
 
@@ -45,4 +47,10 @@ exports.update=function(ans_id,upOrDown,callback){
         answer.findByIdAndUpdate(ans_id, { $inc:{ ups_number: -1 }}, callback);
     }
 
+};
+
+exports.findAnsbyUserId=function(user_id,callback){
+    answer.find({author_id:user_id},function(err,answers){
+        callback(err,answers);
+    });
 };

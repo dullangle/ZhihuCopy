@@ -42,4 +42,9 @@ exports.findQueByQuestionId=function(que_id,callback){
     question.findByIdAndUpdate(que_id, { $inc:{ views: 1 }}, callback);
 };
 
+exports.findQueById=function(que_id,callback){
+    question.findOne({_id:que_id},function(err,question){
+       callback(err,question);
+    });
+};
 
