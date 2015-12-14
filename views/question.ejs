@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <title>Question</title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+    <link rel='stylesheet' href='/stylesheets/nav.css' />
+    <link rel='stylesheet' href='/stylesheets/que.css' />
+    <script type="text/javascript" src="/javascripts/jquery.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap.js"></script>
+    <script type="text/javascript" src="/javascripts/angular.min.js"></script>
+    <script type="text/javascript" src="/javascripts/angular-route.min.js"></script>
+</head>
+<body class="container" >
+<%- include topnav%>
+<div class="home-zhihu col-md-12 ">
+    <div class="left-content col-md-8 ">
+        <div class="que-content">
+            <div class="tag">
+                <a href="#"><span class="badge badge-tag"><%=que.tags[0]%></span></a>
+            </div>
+            <h2 class="que-title"><strong><%=que.title%></strong></h2>
+            <div class="que-content">
+                <%=que.description%>
+            </div>
+            <div class="question_footer">
+                <a href="" class="annotation-color"><span class="glyphicon glyphicon-comment"></span> x条评论</a>
+                <a href="" class="annotation-color"><span class="glyphicon glyphicon-plus"></span>邀请回答</a>
+            </div>
+        </div>
+        <div class="ans-top">
+            <h5><strong>X个回答</strong></h5>
+        </div>
+        <div class="write-ans">
+            <div class="write-ans-top">
+                <span class="h3"><%=author.NickName%></span>
+                <img  class="small_avatar pull-right" src="/images/static/liukanshan.png">
+            </div>
+            <form action="/question/<%=que._id%>/answer" method="post" class="write-ans-content">
+                <div class="form-group">
+                    <textarea name="answer" class="form-control" placeholder="写下你的回答..." rows="8" id="textarea-answer"></textarea>
+                </div>
+                <input type="submit" class="btn btn-info pull-right" value="发布回答">
+            </form>
+        </div>
+    </div>
+    <div class="right-others col-md-4 ">
+            <img id="working" src="/images/static/working.png" alt="">
+            <span id="warning">抱歉，这边正在紧张的施工…</span>
+    </div>
+</div>
+
+</body>
+</html>

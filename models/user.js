@@ -39,3 +39,7 @@ exports.login=function(nickname,password,callbak){
         callbak(err,user);
     });
 };
+
+exports.findUserById=function(author_id,callback){
+  User.findOne({_id:author_id},callback);
+};

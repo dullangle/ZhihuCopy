@@ -19,6 +19,12 @@ var questions=[
     }
 ];
 angular.module('home')
-    .controller('queCtrl', function($scope){
-        $scope.questions=questions;
+    .constant("queUrl","/question")
+    .controller('queCtrl', function($scope,$http,queUrl){
+        //$scope.questions=questions;
+        $http.get(queUrl).success(function(data){
+            $scope.questions=data;
+        }).error(function(err){
+           alert(err);
+        });
 });

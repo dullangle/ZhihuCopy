@@ -24,7 +24,20 @@ router.get('/index', function(req, res, next) {
 router.get('/home', function(req, res, next) {
     res.render('home');
 });
+router.get("/question",function(req,res){
 
+    if(req.session.user){
+        question.findQueByUserId(req.session.user._id,function(err,questions){
+            if(err){
+                return res.status(200).json(err);
+            }
+            else
+                return res.status(200).json(questions);
+        });
+
+    }
+
+});
 router.post("/question",function(req,res){
     var title=req.body.title,
         description=req.body.description,
@@ -33,7 +46,7 @@ router.post("/question",function(req,res){
     tags = [req.body.tag1];
 
 
-    question.newQuestionSave(title,description,tag,function(err){
+    question.newQuestionSave(req.session.user._id,title,description,tag,function(err){
         if(err){
             console.log("save question err");
             return;
@@ -93,8 +106,34 @@ router.post('/signin',function(req,res){
 router.get('/logout', function(req, res, next) {
     if(req.session.user){
         req.session.user=null;
+        res.clearCookie(configure.auth_cookie_name, {
+            maxAge: 1000 * 60 * 60 *24 * 30,
+            signed: true
+        });
         res.redirect('/');
     }
 });
 
+
+router.get("/question/:que_id",function(req,res){
+    var user=req.session.user;
+    var que_id=req.params.que_id;
+    if(user){
+        question.findQueByQuestionId(que_id,function(err,que){
+            if(err){
+                return err;
+            }
+            User.findUserById(que.author_id,function(err,author){
+               if(err){
+                   return err;
+               }
+                return res.render("question",{
+                    que:que,
+                    author:author
+                });
+            });
+
+        });
+    }
+});
 module.exports = router;
