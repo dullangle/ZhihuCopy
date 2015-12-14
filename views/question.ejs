@@ -10,44 +10,121 @@
     <script type="text/javascript" src="/javascripts/angular.min.js"></script>
     <script type="text/javascript" src="/javascripts/angular-route.min.js"></script>
 </head>
-<body class="container" >
-<%- include topnav%>
-<div class="home-zhihu col-md-12 ">
-    <div class="left-content col-md-8 ">
-        <div class="que-content">
-            <div class="tag">
-                <a href="#"><span class="badge badge-tag"><%=que.tags[0]%></span></a>
-            </div>
-            <h2 class="que-title"><strong><%=que.title%></strong></h2>
+<body class="container" ng-app="question" >
+    <%- include topnav%>
+    <div class="home-zhihu col-md-12 ">
+        <div class="left-content col-md-8 " ng-controller="ansQuesCtrl">
             <div class="que-content">
-                <%=que.description%>
-            </div>
-            <div class="question_footer">
-                <a href="" class="annotation-color"><span class="glyphicon glyphicon-comment"></span> x条评论</a>
-                <a href="" class="annotation-color"><span class="glyphicon glyphicon-plus"></span>邀请回答</a>
-            </div>
-        </div>
-        <div class="ans-top">
-            <h5><strong>X个回答</strong></h5>
-        </div>
-        <div class="write-ans">
-            <div class="write-ans-top">
-                <span class="h3"><%=author.NickName%></span>
-                <img  class="small_avatar pull-right" src="/images/static/liukanshan.png">
-            </div>
-            <form action="/question/<%=que._id%>/answer" method="post" class="write-ans-content">
-                <div class="form-group">
-                    <textarea name="answer" class="form-control" placeholder="写下你的回答..." rows="8" id="textarea-answer"></textarea>
+                <div class="tag">
+                    <a href="#"><span class="badge badge-tag"><%=que.tags[0]%></span></a>
                 </div>
-                <input type="submit" class="btn btn-info pull-right" value="发布回答">
-            </form>
+                <h2 class="que-title"><strong><%=que.title%></strong></h2>
+                <div class="que-content">
+                    <%=que.description%>
+                </div>
+                <div class="question_footer">
+                    <a href="" class="annotation-color"><span class="glyphicon glyphicon-comment"></span> x条评论</a>
+                    <a href="" class="annotation-color"><span class="glyphicon glyphicon-plus"></span>邀请回答</a>
+                </div>
+            </div>
+            <div class="ans-top">
+                <h5><strong>X个回答</strong></h5>
+            </div>
+            <div class="ans-main" ng-repeat="ans in answers" >
+                <div class="ans-main-top">
+                    <span class="h3"><strong>{{ans.author_name}}</strong></span>
+                    <img  class="small_avatar pull-right" src="/images/static/liukanshan.png">
+                </div>
+                <div class="ans-main-content">
+                    {{ans.content}}
+                </div>
+                <div class="up-and-down">
+                    <div class="up" >
+                        <span class="glyphicon glyphicon-triangle-top"  style="cursor:pointer" ng-click="upAndDown(ans._id,true)"></span>
+                        <div class="h5 up-cont">{{ans.ups_number}}</div>
+                    </div>
+                    <div class="down">
+                        <span class="glyphicon glyphicon-triangle-bottom"  style="cursor:pointer" ng-click="upAndDown(ans._id,false)"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="write-ans" >
+                <div class="write-ans-top">
+                    <span class="h3"><%=author.NickName%></span>
+                    <img  class="small_avatar pull-right" src="/images/static/liukanshan.png">
+                </div>
+                <form ng-submit="ansQue()" method="post" class="write-ans-content">
+                    <div class="form-group">
+                        <textarea name="answer" ng-model="ansContent" class="form-control" placeholder="写下你的回答..." rows="8" id="textarea-answer"></textarea>
+                    </div>
+                    <input type="submit"  class="btn btn-info pull-right" value="发布回答">
+                </form>
+            </div>
+        </div>
+        <div class="right-others col-md-4 ">
+                <img id="working" src="/images/static/working.png" alt="">
+                <span id="warning">抱歉，这边正在紧张的施工…</span>
         </div>
     </div>
-    <div class="right-others col-md-4 ">
-            <img id="working" src="/images/static/working.png" alt="">
-            <span id="warning">抱歉，这边正在紧张的施工…</span>
-    </div>
-</div>
+     <script>
 
+         var app=angular.module("question",[]);
+
+         app.controller("ansQuesCtrl",function($scope,$http,$location){
+             $scope.ansContent="";
+             $scope.answers=[];
+             $scope.ansQue=function(){
+
+                $http({
+                            method: 'POST',
+                            url: $location.absUrl()+"/answer",
+                            data: {
+                                ans_content: $scope.ansContent
+                            }
+                        }
+                ).success(function (data) {
+                    $scope.answers.push(data);
+                    $scope.ansContent="";
+                    console.log(data.content);
+                }).error(function (data) {
+                    alert("error");
+                    alert(data);
+                });
+             };
+
+             $http({
+                         method: 'GET',
+                         url: $location.absUrl()+"/answer",
+                     }
+             ).success(function (data) {
+                 $scope.answers=data;
+                 console.log(data);
+             }).error(function (data) {
+                 alert("error");
+                 alert(data);
+             });
+
+
+             $scope.upAndDown=function(ans_id,upOrDown){
+                 $http({
+                             method: 'POST',
+                             url: $location.absUrl()+"/answer",
+                             data: {
+                                 ans_content: $scope.ansContent,
+                                 ans_id:ans_id,
+                                 upOrDown:upOrDown,
+                             }
+                         }
+                 ).success(function (data) {
+                     $scope.answers=data;
+                     console.log(data);
+                 }).error(function (data) {
+                     alert("error");
+                     alert(data);
+                 });
+             }
+         });
+
+     </script>
 </body>
 </html>

@@ -16,7 +16,7 @@ var QuestionSchema=new Schema({
 });
 
 var question=mongoose.model("question",QuestionSchema);
-
+exports.Question=question;
 exports.newQuestionSave = function (author_id,title, description, tags, callback) {
     var que = new question();
     que.author_id = author_id;
