@@ -1,6 +1,6 @@
 # ZhihuCopy
 
-copy知乎的前端项目
+copy知乎的Js栈练手项目
 
 ## 技术栈
 
