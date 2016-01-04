@@ -4,7 +4,7 @@ copy知乎的Js栈练手项目
 
 ## 技术栈
 
-- nodj.js
+- node.js
 - express
 - angular.js
 - mongodb
