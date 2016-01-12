@@ -11,7 +11,7 @@ copy知乎的Js栈练手项目
 
 ## 联系方式
 
-[Three_ZJ](http://weibo.com/zjthree/home?topnav=1&wvr=6)
+微博 [Three_ZJ](http://weibo.com/zjthree)
 
 ## 最新进展
 
